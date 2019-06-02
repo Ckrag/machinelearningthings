@@ -37,6 +37,7 @@ def is_strict(points, func):
 
 
 def is_triangle_inadequate(points, func):
+    print("UNSAFE: DONT TRUST")
     print("Checking triangle inequality")
     for x in points:
         for y in points:
@@ -46,7 +47,7 @@ def is_triangle_inadequate(points, func):
                 if func(x, z) > func(x, y) + func(y, z):
                     print("Triangle inequality failed for x:{}, y:{}, z:{}".format(x, y, z))
                     return 0
-    print("..passed..")
+    print("..passed..maaaybeee")
     return 1
 
 
@@ -83,7 +84,7 @@ classify(unknown_func)
 #classify(dist.manhat)
 # print(unknown_func((1, 2), (2, 3)))
 
-
+"""
 print(unknown_func(
     (0, 1),
     (0, 5)
@@ -100,4 +101,4 @@ print(
         (0, 5)
     )
 )
-
+"""
