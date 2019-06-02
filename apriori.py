@@ -47,7 +47,7 @@ def join(iter):
 
 def prune(iter):
     candidates = join(iter)
-    print("The candidates with length ", len(candidates[0]), " are ", candidates)
+    print("The joined set with length ", len(candidates[0]), " are ", candidates)
     pruned = []
     for i in candidates:
         if len(i) == 2:
@@ -57,7 +57,7 @@ def prune(iter):
             t_iter = [tuple(p) for p in iter]
             if set(list(t)).issubset(set(t_iter)):
                 pruned.append(i)
-    print("The pruned with length ", len(candidates[0]), " are ", candidates)
+    print("The candidates/pruned with length ", len(candidates[0]), " are ", candidates)
     return pruned
 
 def check_freq(iter,pruned,support):
