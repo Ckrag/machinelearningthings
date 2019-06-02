@@ -2,11 +2,10 @@ import math
 import numpy as np
 
 
-#NOTE set parameters at the buttom of the script!!
+# NOTE set parameters at the bottom of the script!!
 
 
-
-def euclid(p,o):
+def euclid(p, o):
     """
     o and p vectors of same length
     :param o: vector
@@ -15,24 +14,21 @@ def euclid(p,o):
     """
     return math.sqrt(sum([(v[0] - v[1]) ** 2 for v in zip(o, p)]))
 
-def manhat(p,o):
 
-    return np.sum(abs((np.array(p)-np.array(o))))
+def manhat(p, o):
+    return np.sum(abs((np.array(p) - np.array(o))))
 
 
-
-def xdist(p,k):
-
+def xdist(p, k):
     dat = data[:]
     dat.remove(p)
 
-    temp = np.sort([dist(p,o) for o in dat])
+    temp = np.sort([dist(p, o) for o in dat])
 
-    return(temp[k])
+    return temp[k]
 
 
 def knn(p):
-
     dat = data[:]
     dat.remove(p)
     temp = [dist(p, o) for o in dat]
@@ -44,33 +40,35 @@ def knn(p):
     return sorted(dict1, key=dict1.get)[:t + 1]
 
 
-def reachdist(p,o):
-    return max(xdist(o,k),dist(p,o))
+def reachdist(p, o):
+    return max(xdist(o, k), dist(p, o))
+
 
 def lrd(p):
+    return 1 / (sum([reachdist(p, o) for o in knn(p)]) / len(knn(p)))
 
-    return 1/(sum([reachdist(p,o) for o in knn(p)]) /len(knn(p)))
 
 def lof(p):
+    def lrd_calc(p, o):
+        return lrd(o) / lrd(p)
+
+    return sum([lrd_calc(p, o) for o in knn(p)]) / len(knn(p))
 
 
+# set parameters here
+data = [(1, 1), (1, 2), (2, 1), (2, 2), (3, 5), (3, 9), (3, 10), (4, 10), (4, 11), (5, 10), (7, 10), (10, 9), (9, 4),
+        (9, 5), (10, 3), (10, 4), (10, 5), (10, 6), (11, 4), (11, 5)]
+# point to calculate LOF for
+p = (7, 10)
 
+# distance function
+dist = manhat
 
-    def lrd_calc(p,o):
-        return lrd(o)/lrd(p)
-
-    return (sum([lrd_calc(p, o) for o in knn(p)]) / len(knn(p)))
-
-
-
-#set parameters here
-data = [(1,1),(1,2),(2,1),(2,2),(3,5),(3,9),(3,10),(4,10),(4,11),(5,10),(7,10),(10,9),(9,4),(9,5),(10,3),(10,4),(10,5),(10,6),(11,4),(11,5)]
-p = (10,5)
-dist = manhat # choose distance function (manhat and euclid implemented)
+# k-nearest neighbours
 k = 2
 
-#preparing global variables:
-k -= 1 #NOTE since python is 0 indexed, k needs to be set to one less
+# preparing global variables:
+k -= 1  # NOTE since python is 0 indexed, k needs to be set to one less
 
-#calling lof
+# calling lof
 print(lof(p))
