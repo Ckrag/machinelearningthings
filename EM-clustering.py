@@ -21,7 +21,6 @@ def em_clustering(d,p,mean_list,cov_matrixes,size_list):
     fcx_list = [] #list used to calculate pr(x) from slide 433
     for i in range (0,len(cov_matrixes)):
         mean = mean_list[i]
-        size = size_list[i]
         cov_matrix = cov_matrixes[i]
 
         power = -0.5 * (((p-mean)@np.linalg.inv(cov_matrix))@np.transpose((p-mean)))
@@ -31,11 +30,12 @@ def em_clustering(d,p,mean_list,cov_matrixes,size_list):
     pr_x = sum([a*b for a,b in zip(size_list,fcx_list)])  #pr(x) from slide 433
     print("the OVERALL probability of the data explained by k clusters is ", pr_x)
     for k in range (0,len(fcx_list)):
-        print("th overall probability of the explained by the cluster with the mean ", mean_list[k], " is")
+        print("the relative probability of the point ", p, " explained by the cluster with the mean ", mean_list[k], " is:")
         print(fcx_list[k])
-        print("the relative share of points in the cluster with the mean ", mean_list[k], " is")
+        print("the weighed relatitive probability of the point ", p, " in the cluster with the mean ", mean_list[k], " is:")
         print(fcx_list[k] * size_list[k])
-        print("the probability of some point belonging to the cluster with the mean ", mean_list[k], " is")
+        print("the probability of point: ", p, " belonging to the cluster with the mean ", mean_list[k], " is:")
         print(size_list[k]*(fcx_list[k]/pr_x))
+        print(" ")
 
 em_clustering(d,p,mean_list,cov_matrixes,size_list)
