@@ -87,7 +87,6 @@ def simple_silhouette(clusters, dist, representatives):
     pprint.pprint(result)
 
 
-simple_silhouette(data, manhat,
-                  0)  # give representatives as third input. if representatives are not given give 0 as input
+simple_silhouette(data, manhat,0)  # give representatives as third input. If representatives are not given. Instead give 0 as input
 
 # silhouette(data,manhat)
