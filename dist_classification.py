@@ -42,12 +42,12 @@ def is_triangle_inadequate(points, func):
     for x in points:
         for y in points:
             for z in points:
-                #print("POINTS:", x,y,z)
-                #print("FIRST :", func(x,z), "SECOND :", func(x,y), "THIRD:", func(y, z))
+                # print("POINTS:", x,y,z)
+                # print("FIRST :", func(x,z), "SECOND :", func(x,y), "THIRD:", func(y, z))
                 if func(x, z) > func(x, y) + func(y, z):
                     print("Triangle inequality failed for x:{}, y:{}, z:{}".format(x, y, z))
                     return 0
-    print("..passed..maaaybeee")
+    print("..passed..")
     return 1
 
 
@@ -76,12 +76,12 @@ def classify(func):
 
 
 def unknown_func(p1, p2):
-    #return sum(1 if val[0] != val[1] else 0 for val in zip(p1, p2))
-    return (sum([abs(pair[0] - pair[1])**0.01 for pair in zip(p1, p2)]))**0.01
+    # return sum(1 if val[0] != val[1] else 0 for val in zip(p1, p2))
+    return (sum([abs(pair[0] - pair[1]) ** 0.01 for pair in zip(p1, p2)])) ** 2
 
 
 classify(unknown_func)
-#classify(dist.manhat)
+# classify(dist.manhat)
 # print(unknown_func((1, 2), (2, 3)))
 
 """
